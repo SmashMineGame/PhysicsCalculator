@@ -22,12 +22,16 @@ class Particle {
 		this.pos = iniPos;
 		this.vel = iniVel;
 
+
 		this.forces = [];
 	}
 
-	addForce(f) { this.forces.push(f) }
+	addForce(f) {
+		this.forces.push(f)
+		this.updateAcc();
+	}
 
-	get acc() {
+	updateAcc() {
 		var acc = new Vector();
 		this.forces.forEach(vec => acc.add(vec));
 		return acc;
