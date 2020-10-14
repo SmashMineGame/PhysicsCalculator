@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Physics Calculator</title>
+
+	<script src="script.js"></script>
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+	<h3>Initial Position</h3>
+	<input type="text" name="iniposx" />
+	<input type="text" name="iniposy" />
+
+	<h3>Initial Velocity</h3>
+	<input type="text" name="inivelx" />
+	<input type="text" name="inively" />
+
+	<h3>Forces</h3>
+	<button>Add Force</button>
+
+	<template id="newForce">
+		<h3>Force <span class="count"></span></h3>
+		<input type="number" />
+		<input type="number" />
+	</template>
+
+</body>
+
+</html>
