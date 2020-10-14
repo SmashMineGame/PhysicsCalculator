@@ -19,9 +19,8 @@ class Vector {
 
 class Particle {
 	constructor(iniVel = new Vector(), iniPos = new Vector()) {
-		this.pos = iniPos;
-		this.vel = iniVel;
-
+		this.iniPos = iniPos;
+		this.iniVel = iniVel;
 
 		this.forces = [];
 	}
