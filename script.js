@@ -15,6 +15,8 @@ class Vector {
 	mul(n) { return new Vector(this.x * n, this.y * n) }
 
 	div(n) { return this.mul(1 / n) }
+
+	static fromTrig(theta, mag) { return new Vector(mag * Math.cos(theta), mag * Math.sin(theta)) }
 }
 
 class Particle {
@@ -41,12 +43,17 @@ class Particle {
 window.onload = () => {
 
 	function createVectorInput(name) {
-		var vectorInput = document.getElementById("template-vector-input").content.cloneNode(true);
-		vectorInput.querySelector(".name").innerHTML = name;
-		document.getElementById("root").appendChild(vectorInput);
+		var vectorInput = $($('#template-vector-input').html().trim().replace(/{{name}}/ig, name))
+		$('#vector-inputs').append(vectorInput);
 		return vectorInput;
 	}
-	createVectorInput("Initial Position");
-	createVectorInput("Initial Velocity");
+
+	function getVector(el) {
+		var xCom = el.children('input[name="xCom"]');
+		console.log(xCom);
+	}
+
+	var iniPos = createVectorInput("Initial Position");
+	var iniVel = createVectorInput("Initial Velocity");
 
 }

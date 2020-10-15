@@ -6,23 +6,29 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Physics Calculator</title>
 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="script.js"></script>
 	<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-	<div id="root"></div>
+	<div id="root">
+		<div id="vector-inputs"></div>
+		<button class="calc-btn" onclick="calculate">Callculate</button>
+	</div>
+
+
 
 	<template id="template-vector-input">
 		<div class="vector-input">
-			<h3 class="name">Vector Input</h3>
+			<h3 class="name">{{name}}</h3>
 			<div class="component">
-				<input type="number" placeholder="X Component" />
-				<input type="number" placeholder="Y Component" />
+				<input type="number" name="Xcom" placeholder="X Component" />
+				<input type="number" name="Ycom" placeholder="Y Component" />
 			</div>
 			<div class="trig">
-				<input type="number" placeholder="Angle" />
-				<input type="number" placeholder="Magnitude" />
+				<input type="number" name="Atrig" placeholder="Angle" />
+				<input type="number" name="Mtrig" placeholder="Magnitude" />
 			</div>
 		</div>
 	</template>
