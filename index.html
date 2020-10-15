@@ -14,7 +14,7 @@
 <body>
 	<div id="root">
 		<div id="vector-inputs"></div>
-		<button class="calc-btn" onclick="calculate">Callculate</button>
+		<button class="calc-btn" onclick="calculate()">Callculate</button>
 	</div>
 
 
@@ -22,9 +22,9 @@
 	<template id="template-vector-input">
 		<div class="vector-input">
 			<h3 class="name">{{name}}</h3>
-			<div class="component">
-				<input type="number" name="Xcom" placeholder="X Component" />
-				<input type="number" name="Ycom" placeholder="Y Component" />
+			<div class="comp">
+				<input type="number" name="Xcomp" placeholder="X Component" />
+				<input type="number" name="Ycomp" placeholder="Y Component" />
 			</div>
 			<div class="trig">
 				<input type="number" name="Atrig" placeholder="Angle" />

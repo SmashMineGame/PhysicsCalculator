@@ -40,7 +40,21 @@ class Particle {
 
 }
 
-window.onload = () => {
+function getVector(el) {
+	var xCom = el.children("div.comp").children("input[name='Xcomp']").val();
+	var yCom = el.children("div.comp").children("input[name='Ycomp']").val();
+	var aTri = el.children("div.trig").children("input[name='Atrig']").val();
+	var mTri = el.children("div.trig").children("input[name='Mtrig']").val();
+	console.log(xCom);
+}
+
+var iniPos, iniVel;
+
+function calculate() {
+	getVector(iniPos);
+}
+
+$(() => {
 
 	function createVectorInput(name) {
 		var vectorInput = $($('#template-vector-input').html().trim().replace(/{{name}}/ig, name))
@@ -48,12 +62,9 @@ window.onload = () => {
 		return vectorInput;
 	}
 
-	function getVector(el) {
-		var xCom = el.children('input[name="xCom"]');
-		console.log(xCom);
-	}
 
-	var iniPos = createVectorInput("Initial Position");
-	var iniVel = createVectorInput("Initial Velocity");
 
-}
+	iniPos = createVectorInput("Initial Position");
+	iniVel = createVectorInput("Initial Velocity");
+
+});
