@@ -37,3 +37,16 @@ class Particle {
 	}
 
 }
+
+window.onload = () => {
+
+	function createVectorInput(name) {
+		var vectorInput = document.getElementById("template-vector-input").content.cloneNode(true);
+		vectorInput.querySelector(".name").innerHTML = name;
+		document.getElementById("root").appendChild(vectorInput);
+		return vectorInput;
+	}
+	createVectorInput("Initial Position");
+	createVectorInput("Initial Velocity");
+
+}

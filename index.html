@@ -11,21 +11,20 @@
 </head>
 
 <body>
-	<h3>Initial Position</h3>
-	<input type="text" name="iniposx" />
-	<input type="text" name="iniposy" />
+	<div id="root"></div>
 
-	<h3>Initial Velocity</h3>
-	<input type="text" name="inivelx" />
-	<input type="text" name="inively" />
-
-	<h3>Forces</h3>
-	<button>Add Force</button>
-
-	<template id="newForce">
-		<h3>Force <span class="count"></span></h3>
-		<input type="number" />
-		<input type="number" />
+	<template id="template-vector-input">
+		<div class="vector-input">
+			<h3 class="name">Vector Input</h3>
+			<div class="component">
+				<input type="number" placeholder="X Component" />
+				<input type="number" placeholder="Y Component" />
+			</div>
+			<div class="trig">
+				<input type="number" placeholder="Angle" />
+				<input type="number" placeholder="Magnitude" />
+			</div>
+		</div>
 	</template>
 
 </body>
