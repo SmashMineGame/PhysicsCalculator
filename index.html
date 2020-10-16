@@ -13,15 +13,26 @@
 
 <body>
 	<div id="root">
-		<div id="vector-inputs"></div>
-		<button class="calc-btn" onclick="calculate()">Callculate</button>
+		<div id="init-vector-inputs" class="col">
+			<div class="bordered-box">
+				<h3>Initial Vectors</h3>
+			</div>
+		</div>
+		<div id="midspacer"> hidden </div>
+		<div id="force-vector-inputs" class="col">
+			<div class="bordered-box">
+				<h3>Forces</h3>
+			</div>
+			<button class="btn" onclick="newForce()">New Force</button>
+		</div>
+		<button class="btn" onclick="calculate()">Calculate</button>
 	</div>
 
 	<div id="output"></div>
 
 
 	<template id="template-vector-input">
-		<div class="vector-input">
+		<div class="vector-input bordered-box">
 			<h3 class="name">{{name}}</h3>
 			<div class="comp">
 				<input type="number" name="Xcomp" placeholder="X Component" />

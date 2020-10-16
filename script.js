@@ -68,39 +68,43 @@ function getVector(el) {
 	else return new Vector();
 }
 
-var iniPosEl, iniVelEl, accEl, output = {};
+var iniPosEl, iniVelEl, forces = [];
+
+function createVectorInput(name, force = false) {
+	var vectorInput = $($('#template-vector-input').html().trim().replace(/{{name}}/ig, name))
+	$(force ? "#force-vector-inputs" : "#init-vector-inputs").append(vectorInput);
+	if (!force) $("#init-vector-inputs").append(vectorInput);
+	else $("#force-vector-inputs button").before(vectorInput);
+	return vectorInput;
+}
+
+function newForce() {
+	forces.push(createVectorInput("Force #" + (forces.length + 1), true));
+}
 
 function calculate() {
 	iniPos = getVector(iniPosEl);
 	iniVel = getVector(iniVelEl);
 
-	acc = getVector(accEl);
+	forceVectors = [];
+	forces.forEach(el => forceVectors.push(getVector(el)));
 
 	var particle = new Particle(iniPos, iniVel);
-	particle.addForce(acc);
+	forceVectors.forEach(vec => particle.addForce(vec));
 
-	output = {
+	var output = {
 		maxHeightTime: particle.maxHeightTime(),
 		maxHeightPos: particle.pos(particle.maxHeightTime())
 	}
 
-	console.log(output);
-
+	console.log(particle);
 	$('#output').empty().append(JSON.stringify(output));
 }
 
 $(() => {
 
-	function createVectorInput(name) {
-		var vectorInput = $($('#template-vector-input').html().trim().replace(/{{name}}/ig, name))
-		$('#vector-inputs').append(vectorInput);
-		return vectorInput;
-	}
-
-
-
 	iniPosEl = createVectorInput("Initial Position");
 	iniVelEl = createVectorInput("Initial Velocity");
-	accEl = createVectorInput("Acceleration");
+	newForce();
 
 });
