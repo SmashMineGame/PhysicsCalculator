@@ -8,9 +8,9 @@ class Vector {
 
 	get deg() { return Math.atan(this.y / this.x) }
 
-	add(v) { return new Vector(v.x + this.x, v.y + this.x) }
+	add(v) { return new Vector(v.x + this.x, v.y + this.y) }
 
-	sub(v) { return new Vector(v.x - this.x, v.y - this.x) }
+	sub(v) { return new Vector(v.x - this.x, v.y - this.y) }
 
 	mul(n) { return new Vector(this.x * n, this.y * n) }
 
@@ -20,11 +20,12 @@ class Vector {
 }
 
 class Particle {
-	constructor(iniVel = new Vector(), iniPos = new Vector()) {
+	constructor(iniPos = new Vector(), iniVel = new Vector()) {
 		this.iniPos = iniPos;
 		this.iniVel = iniVel;
 
 		this.forces = [];
+		this.acc = new Vector();
 	}
 
 	addForce(f) {
@@ -34,24 +35,58 @@ class Particle {
 
 	updateAcc() {
 		var acc = new Vector();
-		this.forces.forEach(vec => acc.add(vec));
-		return acc;
+		this.forces.forEach(vec => acc = acc.add(vec));
+		this.acc = acc;
 	}
 
+	vel(t) {
+		return this.iniVel.add(this.acc.mul(t));
+	}
+
+	pos(t) {
+		var a = this.iniPos;
+		var b = this.iniVel.mul(t);
+		var c = this.acc.mul(t * t / 2);
+
+		return c.add(b.add(a));
+	}
+
+	maxHeightTime() {
+		return -this.iniVel.y / this.acc.y;
+	}
 }
 
 function getVector(el) {
 	var xCom = el.children("div.comp").children("input[name='Xcomp']").val();
 	var yCom = el.children("div.comp").children("input[name='Ycomp']").val();
+
 	var aTri = el.children("div.trig").children("input[name='Atrig']").val();
 	var mTri = el.children("div.trig").children("input[name='Mtrig']").val();
-	console.log(xCom);
+
+	if (!(xCom == "" || yCom == "")) return new Vector(xCom == "" ? 0 : +xCom, yCom == "" ? 0 : +yCom);
+	else if (!(aTri == "" || mTri == "")) return Vector.fromTrig(aTri == "" ? 0 : +aTri, mTri == "" ? 1 : +mTri);
+	else return new Vector();
 }
 
-var iniPos, iniVel;
+var iniPosEl, iniVelEl, accEl, output = {};
 
 function calculate() {
-	getVector(iniPos);
+	iniPos = getVector(iniPosEl);
+	iniVel = getVector(iniVelEl);
+
+	acc = getVector(accEl);
+
+	var particle = new Particle(iniPos, iniVel);
+	particle.addForce(acc);
+
+	output = {
+		maxHeightTime: particle.maxHeightTime(),
+		maxHeightPos: particle.pos(particle.maxHeightTime())
+	}
+
+	console.log(output);
+
+	$('#output').empty().append(JSON.stringify(output));
 }
 
 $(() => {
@@ -64,7 +99,8 @@ $(() => {
 
 
 
-	iniPos = createVectorInput("Initial Position");
-	iniVel = createVectorInput("Initial Velocity");
+	iniPosEl = createVectorInput("Initial Position");
+	iniVelEl = createVectorInput("Initial Velocity");
+	accEl = createVectorInput("Acceleration");
 
 });
